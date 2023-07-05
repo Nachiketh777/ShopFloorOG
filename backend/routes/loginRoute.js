@@ -5,7 +5,11 @@ const bodyParser = require("body-parser");
 
 router.route("/login").post((req,res)=>{
     const parameter = req.body;
-    loginLogic(parameter);
+    if(loginLogic(parameter)){
+        return res.json(true)
+    }else{
+        return res.json(false)
+    }
     console.log("Hi")
 })
 module.exports = router;

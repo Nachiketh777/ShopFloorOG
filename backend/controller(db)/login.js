@@ -1,8 +1,9 @@
 const db = require("./connection");
 //need to add exception handling
 //to find existing user in db
-function findOne(props) {
-    const email=props;
+function findOne(userEmail, callbacks) {
+    
+    const email=userEmail;
     db.connect((err)=>{
         if(err){
             return err;
@@ -12,8 +13,8 @@ function findOne(props) {
                     return err;
                 }else{
                     if(data.length!==0){
-                        console.log(data)
-                        return data;
+                        console.log(data[0].adminEmail)
+                        callbacks(data[0])
                     }else{
                         return [{}];
                     }
@@ -21,5 +22,6 @@ function findOne(props) {
             })
         }
     })
+
 }
 module.exports = findOne;
